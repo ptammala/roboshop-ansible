@@ -13,8 +13,8 @@
         src: nginx-roboshop.conf
         dest: /etc/nginx/default.d/roboshop.conf
 
-    - name: Cleanup old content
-        ansible.builtin.file:
+    - name: Cleanup Old Content
+      ansible.builtin.file:
           path: /usr/share/nginx/html
           state: absent
 
