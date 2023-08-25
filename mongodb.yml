@@ -11,7 +11,7 @@
     - name: Installing MongoDb
       ansible.builtin.yum:
         name: mongodb-org
-        state: latest
+        state: installed
 
     - name: Update a Listener in mongodb
       ansible.builtin.replace:
