@@ -1,0 +1,12 @@
+
+
+- name: Copy file to repos
+  ansible.builtin.copy:
+    src: {{catalogue}}.service
+    dest: /etc/systemd/system//{{catalogue}}.service
+
+- name: Restart the {{catalogue}} Service
+  ansible.builtin.systemd:
+    name: {{catalogue}}
+    state: restarted
+    daemon_reload: yes

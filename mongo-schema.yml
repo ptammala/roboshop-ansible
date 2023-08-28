@@ -1,0 +1,18 @@
+#yum install mongodb-org-shell -y
+#
+#Load Schema
+#
+#mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js
+
+- name: Copy file to repos
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: Installing Mongodb Client
+  ansible.builtin.yum:
+    name: mongodb-org-shell
+    state: installed
+
+- name: LOad Mongodb Schema
+  ansible.bulitin.shell: mongo --host mongodb-dev.pdevopst74.online </app/schema/{{catalogue}}.js

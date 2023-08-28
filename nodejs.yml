@@ -1,0 +1,35 @@
+- name: Copy file to repos
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: Install Nodejs Repos
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: Install Nodejs
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: App Prerequestites
+  ansible.builtin.import_tasks: apppreq.yml
+
+- name: Download Nodejs Dependencies
+  ansible.builtin.shell: npm install
+  args:
+    chdir:/app
+
+- name: App Prerequestites
+  ansible.builtin.import_tasks: mongo-schema.yml
+
+
+
+
+
+
+
+
+#
+#
+#    func_systemd
+#
