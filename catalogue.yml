@@ -2,7 +2,7 @@
   hosts: all
   become: true
   vars:
-    components: catalogue
+    component: catalogue
   tasks:
     - name: Import Nodejs yml
       ansible.builtin.import_tasks: nodejs.yml

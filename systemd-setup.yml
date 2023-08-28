@@ -2,11 +2,11 @@
 
 - name: Copy file to repos
   ansible.builtin.copy:
-    src: {{components}}.service
-    dest: /etc/systemd/system//{{components}}.service
+    src: {{component}}.service
+    dest: /etc/systemd/system//{{component}}.service
 
-- name: Restart the {{components}} Service
+- name: Restart the {{component}} Service
   ansible.builtin.systemd:
-    name: {{components}}
+    name: {{component}}
     state: restarted
     daemon_reload: yes
