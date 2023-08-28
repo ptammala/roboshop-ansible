@@ -15,4 +15,4 @@
     state: installed
 
 - name: LOad Mongodb Schema
-  ansible.bulitin.shell: mongo --host mongodb-dev.pdevopst74.online </app/schema/{{catalogue}}.js
+  ansible.builtin.shell: mongo --host mongodb-dev.pdevopst74.online </app/schema/{{catalogue}}.js
