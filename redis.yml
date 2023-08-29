@@ -1,0 +1,51 @@
+- name: Redis Setup
+  hosts: all
+  become: true
+  tasks:
+    - name: Install RPM for redis
+      ansible.builtin.yum:
+        name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+        state: installed
+
+    - name : Enable Redis 6.2
+      ansible.builtin.shell: yum module enable redis:remi-6.2
+
+    - name : Installing Redis
+      ansible.builtin.yum:
+        name: redis
+        state: started
+
+    - name: Update a Listener in Redis config
+      ansible.builtin.replace:
+        path: /etc/redis/redis.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
+
+    - name: Update a Listener in Redis config
+      ansible.builtin.replace:
+        path: /etc/redis.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
+
+    - name: Starting Redis Service
+      ansible.builtin.systemd:
+        name: redis
+        state: started
+        enabled: yes
+
+
+
+
+
+#  yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+#
+#  yum module enable redis:remi-6.2 -y
+#
+#  yum install redis -y
+#
+#  sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf /etc/redis.conf
+#
+#  systemctl enable redis
+#  systemctl restart redis
+#
+
