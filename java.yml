@@ -15,3 +15,6 @@
   - name: Load Mongodb Schema
     ansible.builtin.import_tasks: mysql-schema.yml
     when: schema is defined
+
+  - name : Starting {{component}} Service
+    ansible.builtin.import_tasks: systemd.yml
