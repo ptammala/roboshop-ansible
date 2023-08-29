@@ -1,9 +1,10 @@
-- name: Installing Maven
-  ansible.builtin.yum:
-    name: maven
-    state: installed
+  - name: Installing Maven
+    ansible.builtin.yum:
+      name: maven
+      state: installed
 
-  - name: Seting up App Prerequestes
+
+  - name: App Prerequestites
     ansible.builtin.import_tasks: app-preq.yml
 
   - name: Download Maven Dependedncies
@@ -14,34 +15,3 @@
   - name: Load Mongodb Schema
     ansible.builtin.import_tasks: mysql-schema.yml
     when: schema is defined
-
-
-
-
-
-#
-#  func_java(){
-#
-#    log=/tmp/roboshop.log &>> ${log}
-#
-#    echo -e "\e[31m>>>>>>  Installing Maven <<<<<<<<<<<<<\e[0m" | tee -a ${log}
-#
-#    yum install maven -y &>> ${log}
-#
-#    func_apppreq
-#
-#    echo -e "\e[31m>>>>>>  Building  a  ${component} Service <<<<<<<<<<<<<\e[0m" | tee -a ${log}
-#
-#    cd /app &>> ${log}
-#    mvn clean package &>> ${log}
-#    mv target/${component}-1.0.jar ${component}.jar &>> ${log}
-#
-#    echo -e "\e[31m>>>>>>  Installing MYSQL <<<<<<<<<<<<<\e[0m" | tee -a ${log}
-#    yum install mysql -y &>> ${log}
-#
-#    echo -e "\e[31m>>>>>>  Load Schema   <<<<<<<<<<<<<\e[0m" | tee -a ${log}
-#
-#    mysql -h mysql-dev.pdevopst74.online -uroot -pRoboShop@1 < /app/schema/${component}.sql &>> ${log}
-#
-#    func_systemd
-#  }
