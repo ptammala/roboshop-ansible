@@ -33,37 +33,3 @@
         name: nginx
         state: restarted
         enabled: yes
-
-#    - name: Installing nginx
-#      ansible.builtin.yum:
-#        name: nginx
-#        state: latest
-#
-#    - name: Copying file to nginx default.d
-#      ansible.builtin.copy:
-#
-#        src: nginx-roboshop.conf
-#        dest: /etc/nginx/default.d/roboshop.conf
-#
-#    - name: Cleanup Old Content
-#      ansible.builtin.file:
-#          path: /usr/share/nginx/html
-#          state: absent
-#
-#    - name: Create a directory if it does not exist
-#      ansible.builtin.file:
-#          path: /usr/share/nginx/html
-#          state: directory
-#
-#    - name: Downloading Frontend Application
-#      ansible.builtin.unarchive:
-#          src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-#          dest: /usr/share/nginx/html
-#          remote_src: yes
-#
-#    - name : Restart Nginx
-#      ansible.builtin.systemd:
-#          name: nginx
-#          state: restarted
-
-
