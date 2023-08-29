@@ -22,6 +22,9 @@
 - name: Load Mongodb Schema
   ansible.builtin.import_tasks: mongo-schema.yml
 
+- name: Systemd Service
+  ansible.builtin.import_tasks: systemd-setup.yml
+
 #- name: Systemd Service
 #  ansible.builtin.import_tasks: systemd-setup.yml
 
