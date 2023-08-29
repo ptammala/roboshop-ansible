@@ -6,6 +6,16 @@
   - name: Seting up App Prerequestes
     ansible.builtin.import_tasks: app-preq.yml
 
+  - name: Download Maven Dependedncies
+    ansible.builtin.shell: mvn clean package ;mv target/{{component}}-1.0.jar {{component}}.jar
+    args:
+      chdir: /app
+
+  - name: Load Mongodb Schema
+    ansible.builtin.import_tasks: mysql-schema.yml
+    when: schema is defined
+
+
 
 
 

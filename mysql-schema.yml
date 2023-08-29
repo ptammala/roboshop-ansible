@@ -1,0 +1,9 @@
+
+
+- name: Installing Mysql Client
+  ansible.builtin.yum:
+    name: mysql
+    state: installed
+
+- name: LOad Mongodb Schema
+  ansible.builtin.shell: mysql -h mysql-dev.pdevopst74.online -uroot -pRoboShop@1 < /app/schema/{{component}}.sql
