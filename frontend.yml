@@ -22,7 +22,7 @@
         path: /usr/share/nginx/html/
         state: directory
 
-    - name: Unarchive a file that needs to be downloaded (added in 2.0)
+    - name: Unarchive a file that needs to be downloaded
       ansible.builtin.unarchive:
         src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html/

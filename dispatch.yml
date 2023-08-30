@@ -1,0 +1,50 @@
+- name: Dispatch Setup
+  hosts: all
+  tasks:
+    - name: Installing Go lang
+      ansible.builtin.yum:
+        name: golang
+        state: installed
+
+
+    - name: Unarchive a file that needs to be downloaded
+      ansible.builtin.unarchive:
+        src: https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
+        dest: /app
+        remote_src: yes
+
+    - name: Installing Go packages
+      ansible.builtin.shell: go mod init dispatch; go get; go build
+      args:
+        chdir: /app
+
+    - name: Starting Dispatch Service
+      ansible.builtin.systemd:
+        name: dispatch
+        state: installed
+        enabled: yes
+        daemon_reload: yes
+
+
+
+
+#
+#yum install golang -y
+#cp dispatch.service /etc/systemd/system/dispatch.service
+#useradd roboshop
+#mkdir /app
+#
+#curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
+#cd /app
+#unzip /tmp/dispatch.zip
+#
+#cd /app
+#go mod init dispatch
+#go get
+#go build
+#
+#systemctl daemon-reload
+#
+#systemctl enable dispatch
+#systemctl start dispatch
+
