@@ -5,6 +5,11 @@
     component: dispatch
   tasks:
 
+    - name: Copy file to repos
+      ansible.builtin.copy:
+          src: {{component}}.service
+          dest: /etc/systemd/system/{{component}}.service
+
     - name: Installing Go lang
       ansible.builtin.yum:
         name: golang
@@ -17,6 +22,7 @@
       ansible.builtin.shell: go mod init dispatch; go get; go build
       args:
         chdir: /app
+
 
     - name: Starting Dispatch Service
       ansible.builtin.systemd:
