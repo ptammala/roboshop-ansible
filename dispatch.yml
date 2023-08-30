@@ -1,18 +1,17 @@
 - name: Dispatch Setup
   hosts: all
   become: true
+  vars:
+    component: dispatch
   tasks:
+
     - name: Installing Go lang
       ansible.builtin.yum:
         name: golang
         state: installed
 
-
-    - name: Unarchive a file that needs to be downloaded
-      ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
-        dest: /app
-        remote_src: yes
+    - name: App Prerequestites
+      ansible.builtin.import_tasks: app-preq.yml
 
     - name: Installing Go packages
       ansible.builtin.shell: go mod init dispatch; go get; go build
