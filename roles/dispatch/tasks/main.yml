@@ -9,7 +9,9 @@
     state: installed
 
 - name: App Prerequestites
-  ansible.builtin.import_tasks: app-preq.yml
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-preq.yml
 
 - name: Installing Go packages
   ansible.builtin.shell: go mod init dispatch; go get; go build
