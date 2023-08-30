@@ -1,0 +1,38 @@
+- name: Installing Python packages
+  ansible.builtin.yum:
+    name:
+      - python36
+      - gcc
+      - python3-devel
+    state: installed
+
+
+- name: App Prerequestites
+  ansible.builtin.import_tasks: app-preq.yml
+
+- name: Download Maven Dependedncies
+  ansible.builtin.shell:  pip3.6 install -r requirements.txt
+  args:
+    chdir: /app
+
+
+- name : Starting {{component}} Service
+  ansible.builtin.import_tasks: systemd.yml
+
+
+
+
+#  func_python(){
+#
+#  echo -e "\e[31m>>>>>>  Installing Python   <<<<<<<<<<<<<\e[0m" | tee -a ${log}
+#  yum install python36 gcc python3-devel -y
+#
+#  func_apppreq
+#
+#  echo -e "\e[31m>>>>>>  Installing required packages   <<<<<<<<<<<<<\e[0m" | tee -a ${log}
+#  cd /app
+#  pip3.6 install -r requirements.txt
+#
+#  func_systemd
+#
+#}
