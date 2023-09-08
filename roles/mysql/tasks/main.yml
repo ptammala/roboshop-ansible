@@ -1,7 +1,7 @@
 - name: Copying Configuration file
   ansible.builtin.copy:
-    src: mysql.service
-    dest: /etc/yum.repos.d/mysql.service
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
 
 - name: Disabling mysql
   ansible.builtin.shell: yum module disable mysql -y
